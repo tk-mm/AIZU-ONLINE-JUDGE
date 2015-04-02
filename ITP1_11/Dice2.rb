@@ -36,21 +36,30 @@ class Dice
     @bottom = @front
     @front = tmp
   end
+  def spin
+    tmp = @front
+    @front = @left
+    @left = @back
+    @back = @right
+    @right = tmp
+  end
 end
 
 a,b,c,d,e,f = gets.split(" ").map(&:to_i)
 dice = Dice.new(a,b,c,d,e,f)
-cmd = gets.split("").map(&:to_s)
-cmd.each do |v|
-  case v
-  when "N"
-    dice.north
-  when "E"
-    dice.east
-  when "W"
+gets.to_i.times do |i|
+  cmd1, cmd2 = gets.split(" ").map(&:to_i)
+  if dice.right == cmd1
     dice.west
-  when "S"
-    dice.south
+  elsif dice.left == cmd1
+    dice.east
+  else
+    while dice.top != cmd1
+      dice.north
+    end
   end
+  while dice.front != cmd2
+    dice.spin
+  end
+  puts dice.right
 end
-puts dice.top
