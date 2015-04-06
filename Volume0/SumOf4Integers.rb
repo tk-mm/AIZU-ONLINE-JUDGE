@@ -1,10 +1,13 @@
-while n = gets.to_i
+while n = gets
+  n = n.to_i
   count = 0
-  10.times do |a|
-    10.times do |b|
-      10.times do |c|
-        10.times do |d|
-          count += 1 if (a+b+c+d) == n
+  (0..9).each do |a|
+    (0..9).each do |b|
+      (0..9).each do |c|
+        (0..9).each do |d|
+          if (a+b+c+d) == n
+            count += 1 
+          end
         end
       end
     end
